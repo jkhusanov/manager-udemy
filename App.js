@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import firebase from 'firebase';
 import reducers from './app/reducers';
 import API_KEYS from './app/utils/config_keys';
+import LoginForm from './app/components/LoginForm';
 
 export default class App extends React.Component {
   componentDidUpdate(){
@@ -20,11 +21,8 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducers)}>
-        <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
-          <Text>Changes you make will automatically reload.</Text>
-          <Text>Shake your phone to open the developer menu.</Text>
-        </View>
+        <LoginForm/>
+
       </Provider>
     );
   }
