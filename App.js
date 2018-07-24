@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
+import ReduxThunk from 'redux-thunk';
 import reducers from './app/reducers';
 import API_KEYS from './app/utils/config_keys';
 import LoginForm from './app/components/LoginForm';
 
 export default class App extends React.Component {
-  componentDidUpdate(){
+  componentDidMount(){
     firebase.initializeApp({
       apiKey: API_KEYS[0].apiKey,
       authDomain: API_KEYS[0].authDomain,
@@ -19,8 +20,10 @@ export default class App extends React.Component {
     });
   }
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <LoginForm/>
 
       </Provider>

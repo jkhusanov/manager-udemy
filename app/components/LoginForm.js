@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 
-import { Card, CardSection, Input, CustomButton } from './common'
+import { Card, CardSection, Input, CustomButton, Spinner } from './common'
 
 class LoginForm extends React.Component {
 
@@ -12,6 +12,21 @@ class LoginForm extends React.Component {
   }
   onPasswordChange(text) {
     this.props.passwordChanged(text)
+  }
+  onButtonPress() {
+    const { email, password } = this.props
+    this.props.loginUser({email, password})
+  }
+  renderError() {
+    if(this.props.error) {
+      return(
+        <View style={styles.errorContainer}>
+          <Text style = {styles.errorStyles}>
+            {this.props.error}
+          </Text>
+        </View>
+      )
+    }
   }
   render() {
     return (
@@ -38,11 +53,14 @@ class LoginForm extends React.Component {
               value={this.props.password}
             />
           </CardSection>
-
+          {this.renderError()}
           <CardSection>
-            <CustomButton>
+            { this.props.loading ? 
+            <Spinner size="large"/> :
+            <CustomButton onPress={this.onButtonPress.bind(this)}>
               Login
             </CustomButton>
+            }
           </CardSection>
         </Card>
       </SafeAreaView>
@@ -50,11 +68,24 @@ class LoginForm extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  errorContainer: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  errorStyles: {
+    fontSize: 16,
+    color: 'red',
+    alignSelf: 'center',
+  },
+});
 const mapStateToProps = state => {
   return {
     email: state.auth.email,
     password: state.auth.password,
+    error: state.auth.error,
+    loading: state.auth.loading,
   };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
