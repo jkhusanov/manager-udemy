@@ -6,7 +6,9 @@ import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './app/reducers';
 import API_KEYS from './app/utils/config_keys';
-import LoginForm from './app/components/LoginForm';
+// import LoginFormScreen from './app/components/LoginFormScreen';
+import RootNavigator from './app/navigation/RootNavigator';
+import EmployeeNavigator from './app/navigation/EmployeeNavigator';
 
 export default class App extends React.Component {
   componentDidMount(){
@@ -24,7 +26,7 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <LoginForm/>
+        <RootNavigator/>
 
       </Provider>
     );

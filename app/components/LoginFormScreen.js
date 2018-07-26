@@ -5,8 +5,10 @@ import { emailChanged, passwordChanged, loginUser } from '../actions';
 
 import { Card, CardSection, Input, CustomButton, Spinner } from './common'
 
-class LoginForm extends React.Component {
-
+class LoginFormScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Login',
+  };
   onEmailChangeText(text) {
     this.props.emailChanged(text)
   }
@@ -16,6 +18,7 @@ class LoginForm extends React.Component {
   onButtonPress() {
     const { email, password } = this.props
     this.props.loginUser({email, password})
+    this.props.navigation.navigate('EmployeeList')
   }
   renderError() {
     if(this.props.error) {
@@ -30,7 +33,6 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <SafeAreaView>
         <Card>
           <CardSection>
             <Input
@@ -63,7 +65,6 @@ class LoginForm extends React.Component {
             }
           </CardSection>
         </Card>
-      </SafeAreaView>
     )
   }
 }
@@ -88,4 +89,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginFormScreen);
