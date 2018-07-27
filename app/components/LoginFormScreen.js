@@ -8,6 +8,13 @@ import { Card, CardSection, Input, CustomButton, Spinner } from './common'
 class LoginFormScreen extends React.Component {
   static navigationOptions = {
     title: 'Login',
+    headerTitleStyle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    headerTintColor: '#2F80ED',
+    headerStyle: { backgroundColor: '#FAFAFA', borderBottomWidth: 0.5, borderBottomColor: '#aaaaaa', },
+
   };
   onEmailChangeText(text) {
     this.props.emailChanged(text)
@@ -16,9 +23,9 @@ class LoginFormScreen extends React.Component {
     this.props.passwordChanged(text)
   }
   onButtonPress() {
-    const { email, password } = this.props
-    this.props.loginUser({email, password})
-    this.props.navigation.navigate('EmployeeList')
+    const { email, password, navigation } = this.props
+    this.props.loginUser({email, password, navigation})
+
   }
   renderError() {
     if(this.props.error) {

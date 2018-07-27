@@ -1,13 +1,16 @@
-import { createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 import EmployeeNavigator from './EmployeeNavigator';
+import LoginStack from './LoginStack';
 
-export default createStackNavigator ({
+export default createSwitchNavigator ({
+  LoginStack: {
+    screen: LoginStack
+  },
   Employee: {
     screen: EmployeeNavigator,
   }, 
 
 }, 
 {
-  headerMode: "none",
-  mode: "modal",
+  initialRouteName: 'LoginStack',
 })

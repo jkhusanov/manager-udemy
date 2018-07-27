@@ -2,10 +2,24 @@ import React from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 
 
-
 export default class EmployeeListScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => {
+    return {
     title: 'Employees',
+    headerTitleStyle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    headerTintColor: '#2F80ED',
+    headerStyle: { backgroundColor: '#FAFAFA', borderBottomWidth: 0.5, borderBottomColor: '#aaaaaa', },
+    headerRight: (
+      <Button
+        onPress={() => navigation.navigate('EmployeeCreate')}
+        title="Add"
+        color="#2F80ED"
+      />
+    )
+  }
   };
   render() {
 

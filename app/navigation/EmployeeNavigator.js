@@ -1,13 +1,9 @@
 import { createStackNavigator } from 'react-navigation';
 import EmployeeListScreen from '../components/EmployeeListScreen';
-import LoginFormScreen from '../components/LoginFormScreen';
-import EmployeeScreen from '../components/Emloyee';
+import EmployeeScreen from '../components/EmployeeScreen';
 
 const EmployeeNavigator = createStackNavigator({
-  Login: {
-    screen: LoginFormScreen,
 
-  },
   EmployeeList: {
     screen: EmployeeListScreen, 
     navigationOptions: {
@@ -19,7 +15,7 @@ const EmployeeNavigator = createStackNavigator({
   }
 },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'EmployeeList',
     modal: 'modal',
   });
 

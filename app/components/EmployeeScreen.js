@@ -5,7 +5,13 @@ import { StyleSheet, Button, Text, View } from 'react-native';
 
 export default class EmployeeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Employees',
+    title: 'Employee',
+    headerTitleStyle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    headerTintColor: '#2F80ED',
+    headerStyle: { backgroundColor: '#FAFAFA', borderBottomWidth: 0.5, borderBottomColor: '#aaaaaa', },
   };
   render() {
 
