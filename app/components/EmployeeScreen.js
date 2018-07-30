@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { employeeUpdate } from '../actions';
+import { employeeUpdate, employeeCreate } from '../actions';
 import { Card, CardSection, Input, CustomButton } from './common';
 
 
@@ -15,6 +15,11 @@ class EmployeeScreen extends React.Component {
     headerTintColor: '#2F80ED',
     headerStyle: { backgroundColor: '#FAFAFA', borderBottomWidth: 0.5, borderBottomColor: '#aaaaaa', },
   };
+  onButtonPress(){
+    const { name, phone, shift, navigation } = this.props;
+
+    this.props.employeeCreate({ name, phone, shift: shift || 'Monday', navigation })
+  }
   render() {
 
     return (
@@ -54,7 +59,7 @@ class EmployeeScreen extends React.Component {
         </CardSection>
 
         <CardSection>
-          <CustomButton>
+          <CustomButton onPress={this.onButtonPress.bind(this)}>
             Create
           </CustomButton>
         </CardSection>
@@ -83,4 +88,7 @@ const mapStateToProps = (state) => {
   return {name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate }) (EmployeeScreen);
+export default connect(mapStateToProps, { 
+  employeeUpdate, 
+  employeeCreate 
+}) (EmployeeScreen);
