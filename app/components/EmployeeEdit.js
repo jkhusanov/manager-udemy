@@ -5,9 +5,9 @@ import { employeeUpdate, employeeCreate } from '../actions';
 import { Card, CardSection, Input, CustomButton } from './common';
 import EmployeeForm from './EmployeeForm';
 
-class EmployeeScreen extends React.Component {
+class EmployeeEdit extends React.Component {
   static navigationOptions = {
-    title: 'Employee',
+    title: 'Employee Edit',
     headerTitleStyle: {
       fontSize: 20,
       fontWeight: 'bold',
@@ -21,13 +21,13 @@ class EmployeeScreen extends React.Component {
     this.props.employeeCreate({ name, phone, shift: shift || 'Monday', navigation })
   }
   render() {
-    console.log(this.props.navigation.state.params && this.props.navigation.state.params.employee)
+    // console.log(this.props.navigation.state.params && this.props.navigation.state.params.employee)
     return (
       <Card>
         <EmployeeForm { ...this.props}/>
         <CardSection>
           <CustomButton onPress={this.onButtonPress.bind(this)}>
-            Create
+            Save Changes
           </CustomButton>
         </CardSection>
       </Card>
@@ -58,4 +58,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { 
   employeeUpdate, 
   employeeCreate 
-}) (EmployeeScreen);
+}) (EmployeeEdit);

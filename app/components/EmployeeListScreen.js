@@ -6,7 +6,9 @@ import { employeesFetch } from '../actions';
 import ListItem from './ListItem';
 
 class EmployeeListScreen extends React.Component {
-
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     this.props.employeesFetch();
   };
@@ -31,11 +33,15 @@ class EmployeeListScreen extends React.Component {
   };
 
   renderItem(employee) {
-    return <ListItem employee = {employee} />
+    return (
+    <ListItem
+      employee = {employee}
+    />
+    )
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props.navigation)
     return (
       <View style={styles.container}>
         <FlatList

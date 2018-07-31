@@ -8,19 +8,25 @@ import {
 import { connect } from 'react-redux';
 import { CardSection } from './common';
 import * as actions from '../actions';
+import { withNavigation } from 'react-navigation';
 
 class ListItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  onRowPress() {
+    this.props.navigation.navigate('EmployeeCreate', { employee: this.props.employee.item })
+  }
+
   render() {
     const { name } = this.props.employee.item
     const { titleStyle } = styles
-    console.log(this.props);
 
     return (
       <TouchableOpacity
-        // onPress={() => {
-        //   this.props.expanded ? this.props.selectLibrary(null) : this.props.selectLibrary(id), 
-        //   LayoutAnimation.linear();
-        // }}
+        onPress={() => {
+          this.onRowPress()
+        }}
       >
         <View>
           <CardSection>
@@ -50,4 +56,5 @@ const styles = StyleSheet.create({
 // };
 
 // export default connect(mapStateToProps, actions)(ListItem);
-export default ListItem
+
+export default withNavigation(ListItem);
