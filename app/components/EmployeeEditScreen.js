@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { StyleSheet, Picker, Text } from 'react-native';
+import Communications from 'react-native-communications';
 import { connect } from 'react-redux';
 import { employeeUpdate, employeeSave, clearEmployeeForm } from '../actions';
 import { Card, CardSection, Input, CustomButton } from './common';
@@ -17,21 +18,27 @@ class EmployeeEditScreen extends React.Component {
     headerStyle: { backgroundColor: '#FAFAFA', borderBottomWidth: 0.5, borderBottomColor: '#aaaaaa', },
   };
 
-  componentDidMount(){
+  componentDidMount() {
     _.each(this.props.navigation.state.params.employee, (value, prop) => {
       this.props.employeeUpdate({prop, value});
     });
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.clearEmployeeForm()
   }
 
-  onButtonPress(){
+  onButtonPress() {
     const { name, phone, shift, navigation } = this.props;
 
     // console.log(name, phone, shift)
     this.props.employeeSave({ name, phone, shift, uid: this.props.navigation.state.params.employee.uid, navigation })
   }
+
+  onTextButtonPress() {
+    const { phone, shift } = this.props;
+    Communications.text(phone, `Your upcoming shift is on ${shift}`)
+  }
+
   render() {
     // console.log(this.props.navigation.state.params && this.props.navigation.state.params.employee)
     return (
@@ -42,6 +49,11 @@ class EmployeeEditScreen extends React.Component {
             Save Changes
           </CustomButton>
         </CardSection>
+        <CardSection>
+            <CustomButton onPress={this.onTextButtonPress.bind(this)}>
+              Text Schedule
+            </CustomButton>
+          </CardSection>
       </Card>
     );
   }

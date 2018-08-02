@@ -13,6 +13,7 @@ class EmployeeListScreen extends React.Component {
     this.props.employeesFetch();
   };
 
+
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Employees',

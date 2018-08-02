@@ -31,4 +31,5 @@ exp ios
 - [x] Design & build EmployeeList Screen
   - [x] Connect it to Redux and Firebase - fetch employees
 - [x] Code reuse for Edit Employee
+- [x] Text employees their schedule
 - [ ] Attach screenshots/gif of screens to `README.MD`
