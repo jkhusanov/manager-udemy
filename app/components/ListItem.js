@@ -15,7 +15,7 @@ class ListItem extends React.Component {
     super(props);
   }
   onRowPress() {
-    this.props.navigation.navigate('EmployeeCreate', { employee: this.props.employee.item })
+    this.props.navigation.navigate('EmployeeEdit', { employee: this.props.employee.item })
   }
 
   render() {

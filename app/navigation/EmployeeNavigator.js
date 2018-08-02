@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 import EmployeeListScreen from '../components/EmployeeListScreen';
-import EmployeeScreen from '../components/EmployeeScreen';
+import EmployeeCreateScreen from '../components/EmployeeCreateScreen';
+import EmployeeEditScreen from '../components/EmployeeEditScreen';
 
 const EmployeeNavigator = createStackNavigator({
 
@@ -11,7 +12,10 @@ const EmployeeNavigator = createStackNavigator({
     },
   },
   EmployeeCreate: {
-    screen: EmployeeScreen
+    screen: EmployeeCreateScreen
+  },
+  EmployeeEdit: {
+    screen: EmployeeEditScreen
   }
 },
   {

@@ -1,13 +1,14 @@
+import _ from 'lodash';
 import React from 'react';
 import { StyleSheet, Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { employeeUpdate, employeeCreate } from '../actions';
+import { employeeUpdate, employeeSave, clearEmployeeForm } from '../actions';
 import { Card, CardSection, Input, CustomButton } from './common';
 import EmployeeForm from './EmployeeForm';
 
-class EmployeeScreen extends React.Component {
+class EmployeeEditScreen extends React.Component {
   static navigationOptions = {
-    title: 'Employee',
+    title: 'Edit Employee',
     headerTitleStyle: {
       fontSize: 20,
       fontWeight: 'bold',
@@ -15,19 +16,30 @@ class EmployeeScreen extends React.Component {
     headerTintColor: '#2F80ED',
     headerStyle: { backgroundColor: '#FAFAFA', borderBottomWidth: 0.5, borderBottomColor: '#aaaaaa', },
   };
+
+  componentDidMount(){
+    _.each(this.props.navigation.state.params.employee, (value, prop) => {
+      this.props.employeeUpdate({prop, value});
+    });
+  }
+  componentWillUnmount(){
+    this.props.clearEmployeeForm()
+  }
+
   onButtonPress(){
     const { name, phone, shift, navigation } = this.props;
 
-    this.props.employeeCreate({ name, phone, shift: shift || 'Monday', navigation })
+    // console.log(name, phone, shift)
+    this.props.employeeSave({ name, phone, shift, uid: this.props.navigation.state.params.employee.uid, navigation })
   }
   render() {
-    console.log(this.props.navigation.state.params && this.props.navigation.state.params.employee)
+    // console.log(this.props.navigation.state.params && this.props.navigation.state.params.employee)
     return (
       <Card>
         <EmployeeForm { ...this.props}/>
         <CardSection>
           <CustomButton onPress={this.onButtonPress.bind(this)}>
-            Create
+            Save Changes
           </CustomButton>
         </CardSection>
       </Card>
@@ -56,6 +68,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { 
-  employeeUpdate, 
-  employeeCreate 
-}) (EmployeeScreen);
+  employeeUpdate,
+  employeeSave,
+  clearEmployeeForm, 
+}) (EmployeeEditScreen);
