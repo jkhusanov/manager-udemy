@@ -3,10 +3,12 @@ Simple app, following Udemy [The Complete React Native and Redux Course](https:/
 ## Main Goal
 Getting started with Redux, and going towards production level usage of Redux with React Native. 
 With this project, I've gained a solid experience with Redux and Firebase, and it will definitely help me in future projects. Note, the app might not have super rich UI because the intention is keeping it simple while learning about Redux and focusing on integration.
+
+### [Demo - Try it on Expo](https://expo.io/@jkhusanov/manager-udemy)
+
 ## Demo
 ![Demo gif](https://github.com/jkhusanov/manager-udemy/blob/master/screenshots/demo.gif)
 
-### [Demo - Try it on Expo]()
 
 
 ## Getting started
@@ -37,5 +39,5 @@ exp ios
 
 ### Wireframe
 <div style={{display: flex; flex-direction: row}}>
-  <img  alt="wireframe" src="screenshots/wireframe.png" width="300" />
+  <img  alt="wireframe" src="screenshots/wireframe.png" width="800" />
 </div>
