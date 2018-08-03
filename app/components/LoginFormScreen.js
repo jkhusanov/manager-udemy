@@ -49,6 +49,7 @@ class LoginFormScreen extends React.Component {
               autoCapitalize="none"
               onChangeText={this.onEmailChangeText.bind(this)}
               value={this.props.email}
+              keyboardType={'email-address'}
             />
           </CardSection>
 

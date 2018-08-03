@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
-import { StyleSheet, Picker, Text } from 'react-native';
+import { StyleSheet, Picker, ScrollView } from 'react-native';
 import Communications from 'react-native-communications';
 import { connect } from 'react-redux';
-import { employeeUpdate, employeeSave, clearEmployeeForm } from '../actions';
-import { Card, CardSection, Input, CustomButton } from './common';
+import { employeeUpdate, employeeSave, clearEmployeeForm, employeeDelete } from '../actions';
+import { Card, CardSection, Confirm, CustomButton } from './common';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEditScreen extends React.Component {
@@ -18,9 +18,16 @@ class EmployeeEditScreen extends React.Component {
     headerStyle: { backgroundColor: '#FAFAFA', borderBottomWidth: 0.5, borderBottomColor: '#aaaaaa', },
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+    }
+  }
+
   componentDidMount() {
     _.each(this.props.navigation.state.params.employee, (value, prop) => {
-      this.props.employeeUpdate({prop, value});
+      this.props.employeeUpdate({ prop, value });
     });
   }
   componentWillUnmount() {
@@ -39,22 +46,48 @@ class EmployeeEditScreen extends React.Component {
     Communications.text(phone, `Your upcoming shift is on ${shift}`)
   }
 
+  onAccept() {
+    const { uid } = this.props.navigation.state.params.employee
+    const { navigation } = this.props
+    this.props.employeeDelete({ uid, navigation })
+  }
+  onDecline() {
+    this.setState ({
+      showModal: false,
+    })
+  }
+
   render() {
     // console.log(this.props.navigation.state.params && this.props.navigation.state.params.employee)
     return (
+      <ScrollView>
       <Card>
-        <EmployeeForm { ...this.props}/>
+        <EmployeeForm {...this.props} />
         <CardSection>
           <CustomButton onPress={this.onButtonPress.bind(this)}>
             Save Changes
           </CustomButton>
         </CardSection>
         <CardSection>
-            <CustomButton onPress={this.onTextButtonPress.bind(this)}>
-              Text Schedule
+          <CustomButton onPress={this.onTextButtonPress.bind(this)}>
+            Text Schedule
             </CustomButton>
-          </CardSection>
+        </CardSection>
+
+        <CardSection>
+          <CustomButton onPress={() => this.setState({ showModal: !this.state.showModal})}>
+            Fire Employee
+          </CustomButton>
+        </CardSection>
+
+        <Confirm visible={this.state.showModal}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}
+        >
+          Are you sure you want to delete this?
+        </Confirm>
       </Card>
+      </ScrollView>
     );
   }
 }
@@ -76,11 +109,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   const { name, phone, shift } = state.employeeForm;
 
-  return {name, phone, shift };
+  return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
   employeeUpdate,
   employeeSave,
-  clearEmployeeForm, 
-}) (EmployeeEditScreen);
+  clearEmployeeForm,
+  employeeDelete
+})(EmployeeEditScreen);

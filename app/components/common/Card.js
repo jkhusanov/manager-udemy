@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     marginHorizontal: 5,
-    marginTop: 10,
+    marginVertical: 10,
   }
 });

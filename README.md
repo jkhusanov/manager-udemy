@@ -4,7 +4,7 @@ Simple app, following Udemy [The Complete React Native and Redux Course](https:/
 Getting started with Redux, and going towards production level usage of Redux with React Native. 
 With this project, I've gained a solid experience with Redux and Firebase, and it will definitely help me in future projects. Note, the app might not have super rich UI because the intention is keeping it simple while learning about Redux and focusing on integration.
 ## Demo
-![Demo gif]()
+![Demo gif](https://github.com/jkhusanov/manager-udemy/blob/master/screenshots/demo.gif)
 
 ### [Demo - Try it on Expo]()
 
@@ -31,5 +31,11 @@ exp ios
 - [x] Design & build EmployeeList Screen
   - [x] Connect it to Redux and Firebase - fetch employees
 - [x] Code reuse for Edit Employee
-- [x] Text employees their schedule
-- [ ] Attach screenshots/gif of screens to `README.MD`
+- [x] Implement text employees their schedule feature
+- [x] Implement fire an employee feature
+- [x] Attach screenshots/gif of screens to `README.MD`
+
+### Wireframe
+<div style={{display: flex; flex-direction: row}}>
+  <img  alt="wireframe" src="screenshots/wireframe.png" width="300" />
+</div>

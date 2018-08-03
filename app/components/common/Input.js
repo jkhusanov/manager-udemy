@@ -8,7 +8,7 @@ export class Input extends React.Component {
   }
   render() {
     const { containerStyle, labelStyle, inputStyle} = styles
-    const {value, onChangeText, placeholder, autoCorrect, autoCapitalize, secureTextEntry} = this.props
+    const { value, onChangeText, placeholder, autoCorrect, autoCapitalize, secureTextEntry, keyboardType } = this.props
     return (
       <View style = {containerStyle}>
         <Text style = {labelStyle}>
@@ -22,6 +22,7 @@ export class Input extends React.Component {
           placeholder={placeholder}
           autoCapitalize= {autoCapitalize} 
           secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
         />
       </View>
     );
